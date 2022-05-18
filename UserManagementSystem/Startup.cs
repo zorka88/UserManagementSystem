@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using UserManagementSystem.Data;
 
 namespace UserManagementSystem
 {
@@ -26,10 +28,14 @@ namespace UserManagementSystem
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddDbContext<UsersDbContext>(options => {
+                options.UseSqlServer(Configuration.GetConnectionString("CustomersSqlServerConnectionString"));
+            });
+            services.AddTransient<UsersDbSeeder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UsersDbSeeder usersDbSeeder)
         {
             if (env.IsDevelopment())
             {
@@ -70,6 +76,7 @@ namespace UserManagementSystem
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+            usersDbSeeder.SeedAsync(app.ApplicationServices).Wait();
         }
     }
 }

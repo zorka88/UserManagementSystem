@@ -50,6 +50,17 @@ namespace UserManagementSystem.Data
                 throw;
             }
 
+            var usersPermissions = GetAllUsersPermissions();
+            db.UsersPermissions.AddRange(usersPermissions);
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
 
         private List<User> GetAllUsers()
@@ -84,6 +95,19 @@ namespace UserManagementSystem.Data
             };
             return permissions;
         }
+
+        private List<UserPermission> GetAllUsersPermissions()
+        {
+            var usersPermissions = new List<UserPermission>
+            {
+                new UserPermission {PermissionId = 1,UserId = 1},
+                new UserPermission {PermissionId = 2,UserId = 2},
+                new UserPermission {PermissionId = 1,UserId = 3},
+
+            };
+            return usersPermissions;
+        }
+
 
     }
 }
