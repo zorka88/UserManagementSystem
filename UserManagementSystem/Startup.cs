@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace UserManagementSystem
 {
@@ -26,6 +27,11 @@ namespace UserManagementSystem
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddSwaggerGen((c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApiTest", Version = "v1" });
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +62,9 @@ namespace UserManagementSystem
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+
+                endpoints.MapFallbackToController("Get", "WeatherForecast");
+
             });
 
             app.UseSpa(spa =>
@@ -64,12 +73,18 @@ namespace UserManagementSystem
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "ClientApp";
-
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                    app.UseSwagger();
+                    app.UseSwaggerUI(c => {
+                        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V2");
+                    });
                 }
             });
+
+           
         }
     }
 }
