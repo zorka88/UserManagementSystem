@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UserManagementSystem.Data;
 using UserManagementSystem.DTOs;
+using UserManagementSystem.Models;
 
-namespace UserManagementSystem.Repository
+namespace UserManagementSystem.Contracts
 {
-    public interface IUsersRepository
+    public interface IUserRepository
     {
-        Task<List<UserResponseModel>> GetCustomersAsync();
+        Task<List<UserResponseModel>> GetUsersAsync();
+        Task<PagingResult<UserResponseModel>> GetUsersPageAsync(int skip, int take);
 
         //Task<PagingResult<Customer>> GetCustomersPageAsync(int skip, int take);
         //Task<Customer> GetCustomerAsync(int id);
