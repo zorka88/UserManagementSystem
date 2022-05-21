@@ -1,11 +1,18 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using UserManagementSystem.Contracts;
+using UserManagementSystem.Data;
+using UserManagementSystem.IoC;
+using UserManagementSystem.Models;
+//using UserManagementSystem.Repositories;
 
 namespace UserManagementSystem
 {
@@ -32,6 +39,16 @@ namespace UserManagementSystem
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApiTest", Version = "v1" });
             }));
+
+            services.AddDbContext<UsersDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("UsersSqlServerConnectionString")));
+            services.AddIdentity<User, ApplicationRole>()
+                .AddEntityFrameworkStores<UsersDbContext>()
+                .AddDefaultTokenProviders();
+            //services.AddTransient<UsersDbSeeder>();
+            //services.AddTransient<IUserRepository, UserRepository>();
+
+            //services = Repository.Configure(services);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +73,7 @@ namespace UserManagementSystem
             }
 
             app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -84,6 +102,7 @@ namespace UserManagementSystem
                 }
             });
 
+            //usersDbSeeder.SeedAsync(app.ApplicationServices).Wait();
            
         }
     }

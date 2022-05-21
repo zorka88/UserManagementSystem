@@ -1,18 +1,22 @@
-﻿using System.Collections.Generic;
+﻿
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using UserManagementSystem.Data.Models;
 
 namespace UserManagementSystem.Models
 {
-    public class User
+    public class User : IdentityUser<int>
     {
-        public int Id { get; set; }
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
         public bool StatusIsActive { get; set; }
         public List<UserPermission> Permissions { get; set; }
 
     }
+   
 }

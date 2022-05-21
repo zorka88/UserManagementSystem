@@ -56,19 +56,107 @@ namespace UserManagementSystem.APIs
             }
         }
 
-        public async Task<Customer> InsertCustomerAsync(User user)
+
+        // GET api/customers/5
+        [HttpGet("{id}", Name = "GetUserRoute")]
+       // [NoCache]
+        [ProducesResponseType(typeof(UserResponseModel), 200)]
+        [ProducesResponseType(typeof(ApiResponse), 400)]
+        public async Task<ActionResult> Users(int id)
         {
-            _context.Add(customer);
             try
             {
-                await _Context.SaveChangesAsync();
+                var user = await _userRepository.GetUserAsync(id);
+                return Ok(user);
             }
-            catch (System.Exception exp)
+            catch (Exception exp)
             {
-                _Logger.LogError($"Error in {nameof(InsertCustomerAsync)}: " + exp.Message);
+                //_Logger.LogError(exp.Message);
+                return BadRequest(new ApiResponse { Status = false });
+            }
+        }
+
+
+
+
+        // POST api/customers
+        [HttpPost]
+        // [ValidateAntiForgeryToken]
+        [ProducesResponseType(typeof(ApiResponse), 201)]
+        [ProducesResponseType(typeof(ApiResponse), 400)]
+        public async Task<ActionResult> CreateCustomer([FromBody] UserRequestModel user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new ApiResponse { Status = false, ModelState = ModelState });
             }
 
-            return customer;
+            try
+            {
+                var newUser = await _userRepository.InsertUserAsync(user);
+                if (newUser == null)
+                {
+                    return BadRequest(new ApiResponse { Status = false });
+                }
+                return CreatedAtRoute("GetCustomerRoute", new { id = newUser.Id },
+                        new ApiResponse { Status = true, UserRequest = newUser });
+            }
+            catch (Exception exp)
+            {
+                //_Logger.LogError(exp.Message);
+                return BadRequest(new ApiResponse { Status = false });
+            }
+        }
+
+        // PUT api/customers/5
+        [HttpPut("{id}")]
+        // [ValidateAntiForgeryToken]
+        [ProducesResponseType(typeof(ApiResponse), 200)]
+        [ProducesResponseType(typeof(ApiResponse), 400)]
+        public async Task<ActionResult> UpdateCustomer(/*int id,*/ [FromBody] UpdateUserModel user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new ApiResponse { Status = false, ModelState = ModelState });
+            }
+
+            try
+            {
+                var status = await _userRepository.UpdateUserAsync(user);
+                if (!status)
+                {
+                    return BadRequest(new ApiResponse { Status = false });
+                }
+                return Ok(new ApiResponse { Status = true, UpdatedUserModel = user });
+            }
+            catch (Exception exp)
+            {
+                //_Logger.LogError(exp.Message);
+                return BadRequest(new ApiResponse { Status = false });
+            }
+        }
+
+        // DELETE api/customers/5
+        [HttpDelete("{id}")]
+        // [ValidateAntiForgeryToken]
+        [ProducesResponseType(typeof(ApiResponse), 200)]
+        [ProducesResponseType(typeof(ApiResponse), 400)]
+        public async Task<ActionResult> DeleteCustomer(int id)
+        {
+            try
+            {
+                var status = await _userRepository.DeleteUserAsync(id);
+                if (!status)
+                {
+                    return BadRequest(new ApiResponse { Status = false });
+                }
+                return Ok(new ApiResponse { Status = true });
+            }
+            catch (Exception exp)
+            {
+                //_Logger.LogError(exp.Message);
+                return BadRequest(new ApiResponse { Status = false });
+            }
         }
     }
 }
