@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UserManagementSystem.Contracts;
 using UserManagementSystem.Data;
+using UserManagementSystem.Data.Models;
 using UserManagementSystem.DTOs;
 using UserManagementSystem.Models;
 
@@ -141,6 +142,41 @@ namespace UserManagementSystem.Repositories
             return false;
         }
 
+        public async Task<List<PermissionResponseModel>> ViewAssignedUserPermissions(int userId)
+        {
+            var userPermissions = await _context.UsersPermissions
+               .Include(x => x.Permission)
+               .Include(x => x.User)
+               .Where(x => x.UserId == userId).ToListAsync();
+
+            return userPermissions.Select(x => new PermissionResponseModel
+            {
+                Code = x.Permission.Code,
+                Description = x.Permission.Description
+
+            }).ToList();
+
+        }
+
+        public async Task<bool> AssignPermissionToUser(int userId, List<int> permissionsIds)
+        {
+
+            var listaZaDodati = new List<UserPermission>();
+            foreach(var id in permissionsIds)
+            {
+                listaZaDodati.Add(new UserPermission
+                {
+                    PermissionId = id,
+                    UserId = userId
+                });
+            }
+
+             _context.AddRange(listaZaDodati);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
         private UserResponseModel Map(User user)
         {
             return new UserResponseModel
@@ -154,5 +190,7 @@ namespace UserManagementSystem.Repositories
                 StatusIsActive = user.StatusIsActive
             };
         }
+
+        
     }
 }

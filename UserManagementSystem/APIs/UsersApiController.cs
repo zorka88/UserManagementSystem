@@ -19,7 +19,7 @@ namespace UserManagementSystem.APIs
             _userRepository = userRepository;
         }
 
-        [HttpGet]
+        [HttpGet("GetAllUsers")]
        // [NoCache]
         [ProducesResponseType(typeof(List<UserResponseModel>), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
@@ -27,8 +27,8 @@ namespace UserManagementSystem.APIs
         {
             try
             {
-                var customers = await _userRepository.GetUsersAsync();
-                return Ok(customers);
+                var users = await _userRepository.GetUsersAsync();
+                return Ok(users);
             }
             catch (Exception exp)
             {
@@ -98,6 +98,8 @@ namespace UserManagementSystem.APIs
                 {
                     return BadRequest(new ApiResponse { Status = false });
                 }
+
+                //PODESITI REDIREKCIJU
                 return CreatedAtRoute("GetCustomerRoute", new { id = newUser.Id },
                         new ApiResponse { Status = true, UserRequest = newUser });
             }
@@ -115,6 +117,7 @@ namespace UserManagementSystem.APIs
         [ProducesResponseType(typeof(ApiResponse), 400)]
         public async Task<ActionResult> UpdateCustomer(/*int id,*/ [FromBody] UpdateUserModel user)
         {
+            //URADITI VALIDACIJU ALI RADI ENDPOINT
             if (!ModelState.IsValid)
             {
                 return BadRequest(new ApiResponse { Status = false, ModelState = ModelState });
@@ -151,6 +154,45 @@ namespace UserManagementSystem.APIs
                     return BadRequest(new ApiResponse { Status = false });
                 }
                 return Ok(new ApiResponse { Status = true });
+            }
+            catch (Exception exp)
+            {
+                //_Logger.LogError(exp.Message);
+                return BadRequest(new ApiResponse { Status = false });
+            }
+        }
+
+
+
+        [HttpGet("idddd")]
+        // [NoCache]
+        [ProducesResponseType(typeof(PermissionResponseModel), 200)]
+        [ProducesResponseType(typeof(ApiResponse), 400)]
+        public async Task<ActionResult> GetUserPermissions(int id)
+        {
+            try
+            {
+                var permissions = await _userRepository.ViewAssignedUserPermissions(id);
+                return Ok(permissions);
+            }
+            catch (Exception exp)
+            {
+                //_Logger.LogError(exp.Message);
+                return BadRequest(new ApiResponse { Status = false });
+            }
+        }
+
+
+        [HttpPost("ppp")]
+        // [NoCache]
+        [ProducesResponseType(typeof(PermissionResponseModel), 200)]
+        [ProducesResponseType(typeof(ApiResponse), 400)]
+        public async Task<ActionResult> AssignPermissions(int id,List<int> ids)
+        {
+            try
+            {
+                var permissions = await _userRepository.AssignPermissionToUser(id,ids);
+                return Ok(permissions);
             }
             catch (Exception exp)
             {
