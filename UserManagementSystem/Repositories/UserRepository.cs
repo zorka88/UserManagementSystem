@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +15,22 @@ namespace UserManagementSystem.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly UsersDbContext _context;
+        public readonly IPasswordHasher<User> _passwordHasher;
 
-        public UserRepository(UsersDbContext context)
+        public UserRepository(UsersDbContext context, IPasswordHasher<User> passwordHasher)
         {
             _context = context;
+            _passwordHasher = passwordHasher;
+
         }
 
-       
+
 
         public async Task<List<UserResponseModel>> GetUsersAsync()
         {
             var users = await _context
                 .Users
+                .Where(x => x.StatusIsActive == true)
                 .ToListAsync();
 
             return users.Select(x => new UserResponseModel
@@ -72,25 +77,36 @@ namespace UserManagementSystem.Repositories
 
         }
 
-        public async Task<UserRequestModel> InsertUserAsync(UserRequestModel request)
+        public async Task<UserResponseModel> InsertUserAsync(UserRequestModel request)
         {
             var user = new User
             {
                 FirstName = request.FirstName,
-                LastName = request.LastName
+                LastName = request.LastName,
+                Email = request.Email,
+                UserName = request.Email,
+                EmailConfirmed = true,
+                StatusIsActive = true
+
             };
-            _context.Add(user);
+            
+            _context.Users.Add(user);
+
+            var hashedPassword = _passwordHasher.HashPassword(user, request.Password);
+            user.SecurityStamp = Guid.NewGuid().ToString();
+            user.PasswordHash = hashedPassword;
+
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (System.Exception exp)
             {
-               // _Logger.LogError($"Error in {nameof(InsertCustomerAsync)}: " + exp.Message);
+               // _Logger.LogError($"Error in {nameof(InsertUserAsync)}: " + exp.Message);
             }
 
             ///Provjeri ovaj response
-            var response = new UserRequestModel
+            var response = new UserResponseModel
             {
                 Id = user.Id,
                 FirstName = user.FirstName,
@@ -107,6 +123,10 @@ namespace UserManagementSystem.Repositories
                 .Include(x => x.Permissions)
                 .SingleOrDefaultAsync(x => x.Id == request.Id);
 
+            if (userForUpdate == null) {
+                return false;
+            }
+
             userForUpdate.FirstName = request.FirstName;
             userForUpdate.LastName = request.LastName;
             //userForUpdate.Username = request.Username;
@@ -118,7 +138,7 @@ namespace UserManagementSystem.Repositories
             }
             catch (Exception exp)
             {
-               // _Logger.LogError($"Error in {nameof(UpdateCustomerAsync)}: " + exp.Message);
+               // _Logger.LogError($"Error in {nameof(UpdateUserAsync)}: " + exp.Message);
             }
             return false;
 
@@ -137,7 +157,7 @@ namespace UserManagementSystem.Repositories
             }
             catch (System.Exception exp)
             {
-               // _Logger.LogError($"Error in {nameof(DeleteCustomerAsync)}: " + exp.Message);
+               // _Logger.LogError($"Error in {nameof(DeleteUserAsync)}: " + exp.Message);
             }
             return false;
         }

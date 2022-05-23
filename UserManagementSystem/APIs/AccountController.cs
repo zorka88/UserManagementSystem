@@ -43,7 +43,8 @@ namespace UserManagementSystem.APIs
                 FirstName = userForRegistration.FirstName,
                 LastName = userForRegistration.LastName,
                 Email = userForRegistration.Email,
-                UserName = userForRegistration.Email
+                UserName = userForRegistration.Email,
+                EmailConfirmed = true,
 
             };
 

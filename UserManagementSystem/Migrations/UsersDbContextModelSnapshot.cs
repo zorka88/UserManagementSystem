@@ -297,7 +297,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "22aa2ab2-31d2-493c-8f8f-92883ffeeab6",
+                            ConcurrencyStamp = "14aa54f5-7604-41f1-b228-843bad46b407",
                             Email = "marko@marko1.com",
                             EmailConfirmed = true,
                             FirstName = "Administrator",
@@ -312,7 +312,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "49a688ac-f107-4e61-8b92-dcfd985d1599",
+                            ConcurrencyStamp = "a635760b-8196-48a3-9ec6-3da47e3143a5",
                             Email = "marko@marko2.com",
                             EmailConfirmed = true,
                             FirstName = "Mark",
@@ -327,7 +327,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5d1a6c8e-a64d-4451-aa0a-096a236ed384",
+                            ConcurrencyStamp = "e6a87ea4-327a-46ec-9a72-f6cab5bb86e7",
                             Email = "marko@mar3ko.com",
                             EmailConfirmed = true,
                             FirstName = "Mark",
@@ -342,7 +342,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2fec82b6-1df3-4c7f-b696-459e41806aef",
+                            ConcurrencyStamp = "55a19c49-cd7f-4eaa-97e4-84cb0692a9c4",
                             Email = "marko@mark4o.com",
                             EmailConfirmed = true,
                             FirstName = "Mark",
@@ -357,7 +357,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 5,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4685ed05-0723-4b09-bbca-c304f897c238",
+                            ConcurrencyStamp = "2a0f49a8-f623-489d-b87f-ae91ad1297dd",
                             Email = "marko@marko4.com",
                             EmailConfirmed = true,
                             FirstName = "Mark",
@@ -372,7 +372,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 6,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ef97c629-a5f9-4d23-8dab-20a848f467d9",
+                            ConcurrencyStamp = "7368fc4a-4125-4671-b9a3-2ed179c4d68c",
                             Email = "marko@m6arko.com",
                             EmailConfirmed = true,
                             FirstName = "Mark",
@@ -387,7 +387,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 7,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d1f377d6-45c9-4946-adb5-6ec6fdad488b",
+                            ConcurrencyStamp = "2f7f12e9-36e6-448b-bf29-5f4762f9cbce",
                             Email = "marko@ma6rko.com",
                             EmailConfirmed = true,
                             FirstName = "Mark",
@@ -402,7 +402,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 8,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f0f0a4f0-b3ed-40a9-87d8-4fd85d81afe6",
+                            ConcurrencyStamp = "bf9f1d9c-4862-44cd-9cb3-265736a98859",
                             Email = "marko@mar6ko.com",
                             EmailConfirmed = true,
                             FirstName = "Mark",
@@ -417,7 +417,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 9,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3f4393e9-e985-42bb-8d7e-3b5a1c761f44",
+                            ConcurrencyStamp = "ac1edcdc-b1fe-48f1-bbd4-d77db13f92e5",
                             Email = "marko@mark6o.com",
                             EmailConfirmed = true,
                             FirstName = "Mark",
@@ -432,7 +432,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 10,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8f2c273c-2d15-4f38-b29e-5d6d88ae422f",
+                            ConcurrencyStamp = "c25b1aea-181a-453a-9458-2469819b5bfa",
                             Email = "marko@marko6.com",
                             EmailConfirmed = true,
                             FirstName = "Mark",
@@ -447,7 +447,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 11,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "282b7c25-252f-42c2-90be-6f7eff0fca1d",
+                            ConcurrencyStamp = "70468c0d-e467-450e-8e8c-f707c07bde2b",
                             Email = "marko@m7arko.com",
                             EmailConfirmed = true,
                             FirstName = "Mark",
@@ -462,7 +462,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 12,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c7ed81d9-fccb-420e-b76e-ae191039780d",
+                            ConcurrencyStamp = "e6f447ea-5525-4163-871d-d76c9496bed3",
                             Email = "marko@ma7rko.com",
                             EmailConfirmed = true,
                             FirstName = "Mark",
@@ -477,7 +477,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 13,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7971076f-c8c7-4c7b-a618-fb4195dc88cd",
+                            ConcurrencyStamp = "7a57ad3e-521b-436c-8774-f871608f9cf3",
                             Email = "marko@mar7ko.com",
                             EmailConfirmed = true,
                             FirstName = "Mark",

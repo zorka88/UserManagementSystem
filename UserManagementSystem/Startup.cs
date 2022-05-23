@@ -107,9 +107,10 @@ namespace UserManagementSystem
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapControllers();
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller}/{action=Index}/{id?}");
 
                 endpoints.MapFallbackToController("Get", "WeatherForecast");
 
@@ -124,12 +125,13 @@ namespace UserManagementSystem
                 if (env.IsDevelopment())
                 {
                     //spa.UseAngularCliServer(npmScript: "start");
-                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                    // spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                     app.UseSwagger();
-                    app.UseSwaggerUI(c => {
+                    app.UseSwaggerUI(c =>
+                    {
                         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V2");
                         c.ConfigObject.AdditionalItems.Add("syntaxHighlight", false); //Turns off syntax highlight which causing performance issues...
-                        //c.ConfigObject.AdditionalItems.Add("theme", "agate"); //
+                        c.ConfigObject.AdditionalItems.Add("theme", "agate"); //
                     });
                 }
             });

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -37,8 +38,8 @@ namespace UserManagementSystem.APIs
         }
 
 
-        // GET api/customers/page/10/10
-        [HttpGet("page/{skip}/{take}")]
+        
+        [HttpGet("GetPaginatedUsers/{skip}/{take}")]
         //[NoCache]
         [ProducesResponseType(typeof(List<UserResponseModel>), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
@@ -57,8 +58,8 @@ namespace UserManagementSystem.APIs
         }
 
 
-        // GET api/customers/5
-        [HttpGet("{id}", Name = "GetUserRoute")]
+        
+        [HttpGet("GetUserById/{id}", Name = "GetUserRoute")]
        // [NoCache]
         [ProducesResponseType(typeof(UserResponseModel), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
@@ -79,12 +80,12 @@ namespace UserManagementSystem.APIs
 
 
 
-        // POST api/customers
-        [HttpPost]
+        
+        [HttpPost("CreateUser")]
         // [ValidateAntiForgeryToken]
         [ProducesResponseType(typeof(ApiResponse), 201)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
-        public async Task<ActionResult> CreateCustomer([FromBody] UserRequestModel user)
+        public async Task<ActionResult> CreateUser([FromBody] UserRequestModel user)
         {
             if (!ModelState.IsValid)
             {
@@ -100,8 +101,8 @@ namespace UserManagementSystem.APIs
                 }
 
                 //PODESITI REDIREKCIJU
-                return CreatedAtRoute("GetCustomerRoute", new { id = newUser.Id },
-                        new ApiResponse { Status = true, UserRequest = newUser });
+                return CreatedAtRoute("GetUserRoute", new { id = newUser.Id },
+                        new ApiResponse { Status = true, UserResponse = newUser });
             }
             catch (Exception exp)
             {
@@ -110,12 +111,12 @@ namespace UserManagementSystem.APIs
             }
         }
 
-        // PUT api/customers/5
-        [HttpPut("{id}")]
+        
+        [HttpPut("UpdateUser")]
         // [ValidateAntiForgeryToken]
         [ProducesResponseType(typeof(ApiResponse), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
-        public async Task<ActionResult> UpdateCustomer(/*int id,*/ [FromBody] UpdateUserModel user)
+        public async Task<ActionResult> UpdateUser(/*int id,*/ [FromBody] UpdateUserModel user)
         {
             //URADITI VALIDACIJU ALI RADI ENDPOINT
             if (!ModelState.IsValid)
@@ -139,12 +140,12 @@ namespace UserManagementSystem.APIs
             }
         }
 
-        // DELETE api/customers/5
-        [HttpDelete("{id}")]
+        
+        [HttpDelete("DeleteUser/{id}")]
         // [ValidateAntiForgeryToken]
         [ProducesResponseType(typeof(ApiResponse), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
-        public async Task<ActionResult> DeleteCustomer(int id)
+        public async Task<ActionResult> DeleteUser(int id)
         {
             try
             {
@@ -164,7 +165,7 @@ namespace UserManagementSystem.APIs
 
 
 
-        [HttpGet("idddd")]
+        [HttpGet("GetUserPermission/{id}")]
         // [NoCache]
         [ProducesResponseType(typeof(PermissionResponseModel), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
@@ -183,15 +184,15 @@ namespace UserManagementSystem.APIs
         }
 
 
-        [HttpPost("ppp")]
+        [HttpPost("AssignPermissionsToUser")]
         // [NoCache]
         [ProducesResponseType(typeof(PermissionResponseModel), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
-        public async Task<ActionResult> AssignPermissions(int id,List<int> ids)
+        public async Task<ActionResult> AssignPermissions(int userId,List<int> permissionsIds)
         {
             try
             {
-                var permissions = await _userRepository.AssignPermissionToUser(id,ids);
+                var permissions = await _userRepository.AssignPermissionToUser(userId, permissionsIds);
                 return Ok(permissions);
             }
             catch (Exception exp)

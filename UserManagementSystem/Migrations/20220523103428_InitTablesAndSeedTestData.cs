@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UserManagementSystem.Migrations
 {
-    public partial class inti : Migration
+    public partial class InitTablesAndSeedTestData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -202,19 +202,19 @@ namespace UserManagementSystem.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "StatusIsActive", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "22aa2ab2-31d2-493c-8f8f-92883ffeeab6", "marko@marko1.com", true, "Administrator", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
-                    { 2, 0, "49a688ac-f107-4e61-8b92-dcfd985d1599", "marko@marko2.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
-                    { 3, 0, "5d1a6c8e-a64d-4451-aa0a-096a236ed384", "marko@mar3ko.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
-                    { 4, 0, "2fec82b6-1df3-4c7f-b696-459e41806aef", "marko@mark4o.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
-                    { 5, 0, "4685ed05-0723-4b09-bbca-c304f897c238", "marko@marko4.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
-                    { 6, 0, "ef97c629-a5f9-4d23-8dab-20a848f467d9", "marko@m6arko.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
-                    { 7, 0, "d1f377d6-45c9-4946-adb5-6ec6fdad488b", "marko@ma6rko.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
-                    { 8, 0, "f0f0a4f0-b3ed-40a9-87d8-4fd85d81afe6", "marko@mar6ko.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
-                    { 9, 0, "3f4393e9-e985-42bb-8d7e-3b5a1c761f44", "marko@mark6o.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
-                    { 10, 0, "8f2c273c-2d15-4f38-b29e-5d6d88ae422f", "marko@marko6.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
-                    { 11, 0, "282b7c25-252f-42c2-90be-6f7eff0fca1d", "marko@m7arko.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
-                    { 12, 0, "c7ed81d9-fccb-420e-b76e-ae191039780d", "marko@ma7rko.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
-                    { 13, 0, "7971076f-c8c7-4c7b-a618-fb4195dc88cd", "marko@mar7ko.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" }
+                    { 1, 0, "14aa54f5-7604-41f1-b228-843bad46b407", "marko@marko1.com", true, "Administrator", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
+                    { 2, 0, "a635760b-8196-48a3-9ec6-3da47e3143a5", "marko@marko2.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
+                    { 3, 0, "e6a87ea4-327a-46ec-9a72-f6cab5bb86e7", "marko@mar3ko.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
+                    { 4, 0, "55a19c49-cd7f-4eaa-97e4-84cb0692a9c4", "marko@mark4o.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
+                    { 5, 0, "2a0f49a8-f623-489d-b87f-ae91ad1297dd", "marko@marko4.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
+                    { 6, 0, "7368fc4a-4125-4671-b9a3-2ed179c4d68c", "marko@m6arko.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
+                    { 7, 0, "2f7f12e9-36e6-448b-bf29-5f4762f9cbce", "marko@ma6rko.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
+                    { 8, 0, "bf9f1d9c-4862-44cd-9cb3-265736a98859", "marko@mar6ko.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
+                    { 9, 0, "ac1edcdc-b1fe-48f1-bbd4-d77db13f92e5", "marko@mark6o.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
+                    { 10, 0, "c25b1aea-181a-453a-9458-2469819b5bfa", "marko@marko6.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
+                    { 11, 0, "70468c0d-e467-450e-8e8c-f707c07bde2b", "marko@m7arko.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
+                    { 12, 0, "e6f447ea-5525-4163-871d-d76c9496bed3", "marko@ma7rko.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" },
+                    { 13, 0, "7a57ad3e-521b-436c-8774-f871608f9cf3", "marko@mar7ko.com", true, "Mark", "Markovic", false, null, null, null, null, null, false, null, true, false, "usernm" }
                 });
 
             migrationBuilder.InsertData(
