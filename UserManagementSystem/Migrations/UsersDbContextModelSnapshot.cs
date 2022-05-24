@@ -177,7 +177,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 2,
                             Code = "User",
-                            Description = "User opsi"
+                            Description = "User opis"
                         });
                 });
 
@@ -297,7 +297,7 @@ namespace UserManagementSystem.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "14aa54f5-7604-41f1-b228-843bad46b407",
+                            ConcurrencyStamp = "4cae5d23-f61f-4cdc-9c0d-c47fe3dd1fcb",
                             Email = "marko@marko1.com",
                             EmailConfirmed = true,
                             FirstName = "Administrator",
@@ -306,13 +306,13 @@ namespace UserManagementSystem.Migrations
                             PhoneNumberConfirmed = false,
                             StatusIsActive = true,
                             TwoFactorEnabled = false,
-                            UserName = "usernm"
+                            UserName = "marko@marko1.com"
                         },
                         new
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a635760b-8196-48a3-9ec6-3da47e3143a5",
+                            ConcurrencyStamp = "0b3d9885-0981-4466-83b3-21625a28183a",
                             Email = "marko@marko2.com",
                             EmailConfirmed = true,
                             FirstName = "Mark",
@@ -321,172 +321,172 @@ namespace UserManagementSystem.Migrations
                             PhoneNumberConfirmed = false,
                             StatusIsActive = true,
                             TwoFactorEnabled = false,
-                            UserName = "usernm"
+                            UserName = "marko@marko2.com"
                         },
                         new
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e6a87ea4-327a-46ec-9a72-f6cab5bb86e7",
+                            ConcurrencyStamp = "c50a8286-e23e-4e97-8ae1-d4fbe60db6af",
                             Email = "marko@mar3ko.com",
                             EmailConfirmed = true,
-                            FirstName = "Mark",
+                            FirstName = "Ivan",
                             LastName = "Markovic",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             StatusIsActive = true,
                             TwoFactorEnabled = false,
-                            UserName = "usernm"
+                            UserName = "marko@mar3ko.com"
                         },
                         new
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "55a19c49-cd7f-4eaa-97e4-84cb0692a9c4",
+                            ConcurrencyStamp = "4d06e0ac-6b5a-4c3b-8336-f970cde2b520",
                             Email = "marko@mark4o.com",
                             EmailConfirmed = true,
-                            FirstName = "Mark",
+                            FirstName = "Jovan",
                             LastName = "Markovic",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             StatusIsActive = true,
                             TwoFactorEnabled = false,
-                            UserName = "usernm"
+                            UserName = "marko@mark4o.com"
                         },
                         new
                         {
                             Id = 5,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2a0f49a8-f623-489d-b87f-ae91ad1297dd",
+                            ConcurrencyStamp = "4be6cb4a-ab1b-4903-9482-17137158fdea",
                             Email = "marko@marko4.com",
                             EmailConfirmed = true,
-                            FirstName = "Mark",
+                            FirstName = "Mirko",
                             LastName = "Markovic",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             StatusIsActive = true,
                             TwoFactorEnabled = false,
-                            UserName = "usernm"
+                            UserName = "marko@marko4.com"
                         },
                         new
                         {
                             Id = 6,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7368fc4a-4125-4671-b9a3-2ed179c4d68c",
+                            ConcurrencyStamp = "e61f16f6-97e3-425f-b559-389110baa064",
                             Email = "marko@m6arko.com",
                             EmailConfirmed = true,
-                            FirstName = "Mark",
+                            FirstName = "Slavko",
                             LastName = "Markovic",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             StatusIsActive = true,
                             TwoFactorEnabled = false,
-                            UserName = "usernm"
+                            UserName = "marko@m6arko.com"
                         },
                         new
                         {
                             Id = 7,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2f7f12e9-36e6-448b-bf29-5f4762f9cbce",
+                            ConcurrencyStamp = "ffbf1e79-b903-4fa8-a53e-9211eb6290ea",
                             Email = "marko@ma6rko.com",
                             EmailConfirmed = true,
-                            FirstName = "Mark",
+                            FirstName = "Simo",
                             LastName = "Markovic",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             StatusIsActive = true,
                             TwoFactorEnabled = false,
-                            UserName = "usernm"
+                            UserName = "marko@ma6rko.com"
                         },
                         new
                         {
                             Id = 8,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bf9f1d9c-4862-44cd-9cb3-265736a98859",
+                            ConcurrencyStamp = "b3c81961-58b0-43d4-a5dc-db8cebff4183",
                             Email = "marko@mar6ko.com",
                             EmailConfirmed = true,
-                            FirstName = "Mark",
+                            FirstName = "Luka",
                             LastName = "Markovic",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             StatusIsActive = true,
                             TwoFactorEnabled = false,
-                            UserName = "usernm"
+                            UserName = "marko@mar6ko.com"
                         },
                         new
                         {
                             Id = 9,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ac1edcdc-b1fe-48f1-bbd4-d77db13f92e5",
+                            ConcurrencyStamp = "20dbffd8-fdf7-4188-8067-7d2432780f48",
                             Email = "marko@mark6o.com",
                             EmailConfirmed = true,
-                            FirstName = "Mark",
+                            FirstName = "Ante",
                             LastName = "Markovic",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             StatusIsActive = true,
                             TwoFactorEnabled = false,
-                            UserName = "usernm"
+                            UserName = "arko@mark6o.com"
                         },
                         new
                         {
                             Id = 10,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c25b1aea-181a-453a-9458-2469819b5bfa",
+                            ConcurrencyStamp = "83b7e864-97b9-4058-90f8-3eeb545ce3d3",
                             Email = "marko@marko6.com",
                             EmailConfirmed = true,
-                            FirstName = "Mark",
+                            FirstName = "Filip",
                             LastName = "Markovic",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             StatusIsActive = true,
                             TwoFactorEnabled = false,
-                            UserName = "usernm"
+                            UserName = "marko@marko6.com"
                         },
                         new
                         {
                             Id = 11,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "70468c0d-e467-450e-8e8c-f707c07bde2b",
+                            ConcurrencyStamp = "69646b25-50cb-482e-82ec-526637333a57",
                             Email = "marko@m7arko.com",
                             EmailConfirmed = true,
-                            FirstName = "Mark",
+                            FirstName = "Djuro",
                             LastName = "Markovic",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             StatusIsActive = true,
                             TwoFactorEnabled = false,
-                            UserName = "usernm"
+                            UserName = "marko@m7arko.com"
                         },
                         new
                         {
                             Id = 12,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e6f447ea-5525-4163-871d-d76c9496bed3",
+                            ConcurrencyStamp = "4cf7be92-6443-4328-94c7-f51c39facf9b",
                             Email = "marko@ma7rko.com",
                             EmailConfirmed = true,
-                            FirstName = "Mark",
+                            FirstName = "Ivica",
                             LastName = "Markovic",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             StatusIsActive = true,
                             TwoFactorEnabled = false,
-                            UserName = "usernm"
+                            UserName = "marko@ma7rko.com"
                         },
                         new
                         {
                             Id = 13,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7a57ad3e-521b-436c-8774-f871608f9cf3",
+                            ConcurrencyStamp = "a56daf66-3b2e-4fc3-9eec-73fd3bfa39c4",
                             Email = "marko@mar7ko.com",
                             EmailConfirmed = true,
-                            FirstName = "Mark",
+                            FirstName = "Marica",
                             LastName = "Markovic",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             StatusIsActive = true,
                             TwoFactorEnabled = false,
-                            UserName = "usernm"
+                            UserName = "marko@mar7ko.com"
                         });
                 });
 

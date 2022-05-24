@@ -37,7 +37,6 @@ namespace UserManagementSystem.APIs
             if (userForRegistration == null || !ModelState.IsValid)
                 return BadRequest();
 
-            //var user = _mapper.Map<User>(userForRegistration);
             var user = new User
             {
                 FirstName = userForRegistration.FirstName,
@@ -45,6 +44,7 @@ namespace UserManagementSystem.APIs
                 Email = userForRegistration.Email,
                 UserName = userForRegistration.Email,
                 EmailConfirmed = true,
+                StatusIsActive = true
 
             };
 

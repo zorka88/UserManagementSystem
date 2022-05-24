@@ -71,11 +71,9 @@ namespace UserManagementSystem
                 };
             });
 
-            services.AddScoped<JwtHandler>();
-            //services.AddTransient<UsersDbSeeder>();
-            services.AddTransient<IUserRepository, UserRepository>();
-
-            //services = Repository.Configure(services);
+            //services.AddScoped<JwtHandler>();
+            //services.AddTransient<IUserRepository, UserRepository>();
+           services = Repository.Configure(services);
 
         }
 

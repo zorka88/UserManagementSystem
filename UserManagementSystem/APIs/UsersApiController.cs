@@ -21,7 +21,6 @@ namespace UserManagementSystem.APIs
         }
 
         [HttpGet("GetAllUsers")]
-       // [NoCache]
         [ProducesResponseType(typeof(List<UserResponseModel>), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
         public async Task<ActionResult> Users()
@@ -40,7 +39,6 @@ namespace UserManagementSystem.APIs
 
         
         [HttpGet("GetPaginatedUsers/{skip}/{take}")]
-        //[NoCache]
         [ProducesResponseType(typeof(List<UserResponseModel>), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
         public async Task<ActionResult> UsersPage(int skip, int take)
@@ -52,7 +50,6 @@ namespace UserManagementSystem.APIs
             }
             catch (Exception exp)
             {
-                //_Logger.LogError(exp.Message);
                 return BadRequest(new ApiResponse { Status = false });
             }
         }
@@ -60,10 +57,9 @@ namespace UserManagementSystem.APIs
 
         
         [HttpGet("GetUserById/{id}", Name = "GetUserRoute")]
-       // [NoCache]
         [ProducesResponseType(typeof(UserResponseModel), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
-        public async Task<ActionResult> Users(int id)
+        public async Task<ActionResult> GetUserById(int id)
         {
             try
             {
@@ -72,15 +68,10 @@ namespace UserManagementSystem.APIs
             }
             catch (Exception exp)
             {
-                //_Logger.LogError(exp.Message);
                 return BadRequest(new ApiResponse { Status = false });
             }
         }
 
-
-
-
-        
         [HttpPost("CreateUser")]
         // [ValidateAntiForgeryToken]
         [ProducesResponseType(typeof(ApiResponse), 201)]
@@ -100,13 +91,12 @@ namespace UserManagementSystem.APIs
                     return BadRequest(new ApiResponse { Status = false });
                 }
 
-                //PODESITI REDIREKCIJU
+
                 return CreatedAtRoute("GetUserRoute", new { id = newUser.Id },
                         new ApiResponse { Status = true, UserResponse = newUser });
             }
             catch (Exception exp)
             {
-                //_Logger.LogError(exp.Message);
                 return BadRequest(new ApiResponse { Status = false });
             }
         }
@@ -116,9 +106,9 @@ namespace UserManagementSystem.APIs
         // [ValidateAntiForgeryToken]
         [ProducesResponseType(typeof(ApiResponse), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
-        public async Task<ActionResult> UpdateUser(/*int id,*/ [FromBody] UpdateUserModel user)
+        public async Task<ActionResult> UpdateUser( [FromBody] UpdateUserModel user)
         {
-            //URADITI VALIDACIJU ALI RADI ENDPOINT
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(new ApiResponse { Status = false, ModelState = ModelState });
@@ -135,14 +125,13 @@ namespace UserManagementSystem.APIs
             }
             catch (Exception exp)
             {
-                //_Logger.LogError(exp.Message);
+
                 return BadRequest(new ApiResponse { Status = false });
             }
         }
 
         
         [HttpDelete("DeleteUser/{id}")]
-        // [ValidateAntiForgeryToken]
         [ProducesResponseType(typeof(ApiResponse), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
         public async Task<ActionResult> DeleteUser(int id)
@@ -158,7 +147,6 @@ namespace UserManagementSystem.APIs
             }
             catch (Exception exp)
             {
-                //_Logger.LogError(exp.Message);
                 return BadRequest(new ApiResponse { Status = false });
             }
         }
@@ -178,14 +166,12 @@ namespace UserManagementSystem.APIs
             }
             catch (Exception exp)
             {
-                //_Logger.LogError(exp.Message);
                 return BadRequest(new ApiResponse { Status = false });
             }
         }
 
 
         [HttpPost("AssignPermissionsToUser")]
-        // [NoCache]
         [ProducesResponseType(typeof(PermissionResponseModel), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
         public async Task<ActionResult> AssignPermissions(int userId,List<int> permissionsIds)
@@ -197,7 +183,6 @@ namespace UserManagementSystem.APIs
             }
             catch (Exception exp)
             {
-                //_Logger.LogError(exp.Message);
                 return BadRequest(new ApiResponse { Status = false });
             }
         }

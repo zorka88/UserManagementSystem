@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using UserManagementSystem.Contracts;
 using UserManagementSystem.Data;
+using UserManagementSystem.JwtFeatures;
+using UserManagementSystem.Repositories;
 //using UserManagementSystem.Repositories;
 
 namespace UserManagementSystem.IoC
@@ -13,7 +15,8 @@ namespace UserManagementSystem.IoC
     {
         public static IServiceCollection Configure(this IServiceCollection services)
         {
-            //services.AddScoped<IUserRepository, UserRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddScoped<JwtHandler>();
             return services;
         }
     }

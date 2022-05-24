@@ -39,7 +39,6 @@ namespace UserManagementSystem.Repositories
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 Email = x.Email,
-                //Username = x.Username,
                 StatusIsActive = x.StatusIsActive
             }).ToList();
 
@@ -60,7 +59,6 @@ namespace UserManagementSystem.Repositories
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 Email = x.Email,
-                //Username = x.Username,
                 StatusIsActive = x.StatusIsActive
 
             }).ToList();
@@ -102,10 +100,9 @@ namespace UserManagementSystem.Repositories
             }
             catch (System.Exception exp)
             {
-               // _Logger.LogError($"Error in {nameof(InsertUserAsync)}: " + exp.Message);
+
             }
 
-            ///Provjeri ovaj response
             var response = new UserResponseModel
             {
                 Id = user.Id,
@@ -129,8 +126,8 @@ namespace UserManagementSystem.Repositories
 
             userForUpdate.FirstName = request.FirstName;
             userForUpdate.LastName = request.LastName;
-            //userForUpdate.Username = request.Username;
             userForUpdate.Email = request.Email;
+            userForUpdate.UserName = request.Email;
 
             try
             {
@@ -146,7 +143,7 @@ namespace UserManagementSystem.Repositories
         }
 
         public async Task<bool> DeleteUserAsync(int id)
-        {//testiraj brisanje permisija s userom
+        {
             var user = await _context.Users
                                 .Include(c => c.Permissions)
                                 .SingleOrDefaultAsync(c => c.Id == id);
@@ -205,8 +202,6 @@ namespace UserManagementSystem.Repositories
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
-                //Password = user.Password,
-                //Username = user.Username,
                 StatusIsActive = user.StatusIsActive
             };
         }
