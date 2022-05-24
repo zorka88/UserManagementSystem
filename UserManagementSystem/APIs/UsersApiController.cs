@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,16 +20,15 @@ namespace UserManagementSystem.APIs
             _userRepository = userRepository;
         }
 
-        [HttpGet]
-       // [NoCache]
+        [HttpGet("GetAllUsers")]
         [ProducesResponseType(typeof(List<UserResponseModel>), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
         public async Task<ActionResult> Users()
         {
             try
             {
-                var customers = await _userRepository.GetUsersAsync();
-                return Ok(customers);
+                var users = await _userRepository.GetUsersAsync();
+                return Ok(users);
             }
             catch (Exception exp)
             {
@@ -37,9 +37,8 @@ namespace UserManagementSystem.APIs
         }
 
 
-        // GET api/customers/page/10/10
-        [HttpGet("page/{skip}/{take}")]
-        //[NoCache]
+        
+        [HttpGet("GetPaginatedUsers/{skip}/{take}")]
         [ProducesResponseType(typeof(List<UserResponseModel>), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
         public async Task<ActionResult> UsersPage(int skip, int take)
@@ -51,24 +50,141 @@ namespace UserManagementSystem.APIs
             }
             catch (Exception exp)
             {
-                //_Logger.LogError(exp.Message);
                 return BadRequest(new ApiResponse { Status = false });
             }
         }
 
-        public async Task<Customer> InsertCustomerAsync(User user)
+
+        
+        [HttpGet("GetUserById/{id}", Name = "GetUserRoute")]
+        [ProducesResponseType(typeof(UserResponseModel), 200)]
+        [ProducesResponseType(typeof(ApiResponse), 400)]
+        public async Task<ActionResult> GetUserById(int id)
         {
-            _context.Add(customer);
             try
             {
-                await _Context.SaveChangesAsync();
+                var user = await _userRepository.GetUserAsync(id);
+                return Ok(user);
             }
-            catch (System.Exception exp)
+            catch (Exception exp)
             {
-                _Logger.LogError($"Error in {nameof(InsertCustomerAsync)}: " + exp.Message);
+                return BadRequest(new ApiResponse { Status = false });
+            }
+        }
+
+        [HttpPost("CreateUser")]
+        // [ValidateAntiForgeryToken]
+        [ProducesResponseType(typeof(ApiResponse), 201)]
+        [ProducesResponseType(typeof(ApiResponse), 400)]
+        public async Task<ActionResult> CreateUser([FromBody] UserRequestModel user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new ApiResponse { Status = false, ModelState = ModelState });
             }
 
-            return customer;
+            try
+            {
+                var newUser = await _userRepository.InsertUserAsync(user);
+                if (newUser == null)
+                {
+                    return BadRequest(new ApiResponse { Status = false });
+                }
+
+
+                return CreatedAtRoute("GetUserRoute", new { id = newUser.Id },
+                        new ApiResponse { Status = true, UserResponse = newUser });
+            }
+            catch (Exception exp)
+            {
+                return BadRequest(new ApiResponse { Status = false });
+            }
+        }
+
+        
+        [HttpPut("UpdateUser")]
+        // [ValidateAntiForgeryToken]
+        [ProducesResponseType(typeof(ApiResponse), 200)]
+        [ProducesResponseType(typeof(ApiResponse), 400)]
+        public async Task<ActionResult> UpdateUser( [FromBody] UpdateUserModel user)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new ApiResponse { Status = false, ModelState = ModelState });
+            }
+
+            try
+            {
+                var status = await _userRepository.UpdateUserAsync(user);
+                if (!status)
+                {
+                    return BadRequest(new ApiResponse { Status = false });
+                }
+                return Ok(new ApiResponse { Status = true, UpdatedUserModel = user });
+            }
+            catch (Exception exp)
+            {
+
+                return BadRequest(new ApiResponse { Status = false });
+            }
+        }
+
+        
+        [HttpDelete("DeleteUser/{id}")]
+        [ProducesResponseType(typeof(ApiResponse), 200)]
+        [ProducesResponseType(typeof(ApiResponse), 400)]
+        public async Task<ActionResult> DeleteUser(int id)
+        {
+            try
+            {
+                var status = await _userRepository.DeleteUserAsync(id);
+                if (!status)
+                {
+                    return BadRequest(new ApiResponse { Status = false });
+                }
+                return Ok(new ApiResponse { Status = true });
+            }
+            catch (Exception exp)
+            {
+                return BadRequest(new ApiResponse { Status = false });
+            }
+        }
+
+
+
+        [HttpGet("GetUserPermission/{id}")]
+        // [NoCache]
+        [ProducesResponseType(typeof(PermissionResponseModel), 200)]
+        [ProducesResponseType(typeof(ApiResponse), 400)]
+        public async Task<ActionResult> GetUserPermissions(int id)
+        {
+            try
+            {
+                var permissions = await _userRepository.ViewAssignedUserPermissions(id);
+                return Ok(permissions);
+            }
+            catch (Exception exp)
+            {
+                return BadRequest(new ApiResponse { Status = false });
+            }
+        }
+
+
+        [HttpPost("AssignPermissionsToUser")]
+        [ProducesResponseType(typeof(PermissionResponseModel), 200)]
+        [ProducesResponseType(typeof(ApiResponse), 400)]
+        public async Task<ActionResult> AssignPermissions(int userId,List<int> permissionsIds)
+        {
+            try
+            {
+                var permissions = await _userRepository.AssignPermissionToUser(userId, permissionsIds);
+                return Ok(permissions);
+            }
+            catch (Exception exp)
+            {
+                return BadRequest(new ApiResponse { Status = false });
+            }
         }
     }
 }

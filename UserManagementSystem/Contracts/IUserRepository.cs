@@ -12,12 +12,11 @@ namespace UserManagementSystem.Contracts
     {
         Task<List<UserResponseModel>> GetUsersAsync();
         Task<PagingResult<UserResponseModel>> GetUsersPageAsync(int skip, int take);
-
-        //Task<PagingResult<Customer>> GetCustomersPageAsync(int skip, int take);
-        //Task<Customer> GetCustomerAsync(int id);
-
-        //Task<Customer> InsertCustomerAsync(Customer customer);
-        //Task<bool> UpdateCustomerAsync(Customer customer);
-        //Task<bool> DeleteCustomerAsync(int id);
+        Task<UserResponseModel> GetUserAsync(int userId);
+        Task<UserResponseModel> InsertUserAsync(UserRequestModel user);
+        Task<bool> UpdateUserAsync(UpdateUserModel user);
+        Task<bool> DeleteUserAsync(int userId);
+        Task<List<PermissionResponseModel>> ViewAssignedUserPermissions(int userId);
+        Task<bool> AssignPermissionToUser(int userId, List<int> permissionsIds);
     }
 }
